@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,16 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::prefix('/dashboard')->middleware(['auth'])->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::prefix('/users')->middleware(['auth'])->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('admin.user.index');
+    });
+});
+
 
 
 
