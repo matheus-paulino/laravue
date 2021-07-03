@@ -31,8 +31,10 @@ Route::get('/', function () {
 Route::prefix('/dashboard')->middleware(['auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::prefix('/users')->middleware(['auth'])->group(function () {
+    Route::prefix('/users')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('admin.user.index');
+        Route::get('/new', [UserController::class, 'create'])->name('admin.user.create');
+        Route::post('/new', [UserController::class, 'store'])->name('admin.user.store');
     });
 });
 
