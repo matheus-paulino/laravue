@@ -35,6 +35,7 @@ Route::prefix('/dashboard')->middleware(['auth'])->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('admin.user.index');
         Route::get('/new', [UserController::class, 'create'])->name('admin.user.create');
         Route::post('/new', [UserController::class, 'store'])->name('admin.user.store');
+        Route::get('/edit/{id}', [UserController::class, 'show'])->name('admin.user.show');
     });
 });
 

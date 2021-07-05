@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -40,5 +41,22 @@ class UserController extends Controller
         ]);
 
         return Redirect::route('admin.user.index');
+    }
+
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+
+        /**
+         * TODO: Tratar quando não achar o usuário
+         */
+
+        if (!$user) {
+            return Redirect::route('admin.user.index');
+        }
+
+        return Inertia::render('Admin/User/Show', [
+            'user' => $user
+        ]);
     }
 }

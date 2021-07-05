@@ -163,11 +163,12 @@
                           font-medium
                         "
                       >
-                        <a
-                          href="#"
+                        <inertia-link
+                          :href="route('admin.user.show', user.id)"
                           class="text-indigo-600 hover:text-indigo-900"
-                          >Edit</a
-                        >
+                          >
+                          Edit
+                        </inertia-link>
                       </td>
                     </tr>
 
