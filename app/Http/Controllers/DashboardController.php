@@ -8,10 +8,8 @@ use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
-    public function index(User $users)
+    public function index()
     {
-        return Inertia::render('Dashboard', [
-            'users' => $users->select(['id', 'name', 'email'])->get()
-        ]);
+        return Inertia::render('Dashboard');
     }
 }

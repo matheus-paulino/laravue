@@ -12,7 +12,11 @@ class UserController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Admin/User/Index');
+        $users = User::select(['id', 'name', 'email'])->get();
+
+        return Inertia::render('Admin/User/Index', [
+            'users' => $users
+        ]);
     }
 
     public function create()
