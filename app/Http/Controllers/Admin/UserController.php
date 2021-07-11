@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -45,18 +46,21 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $user = User::findOrFail($id);
+        try {
+            $user = User::findOrFail($id);
 
-        /**
-         * TODO: Tratar quando não achar o usuário
-         */
+            return Inertia::render('Admin/User/Show', [
+                'user' => $user
+            ]);
 
-        if (!$user) {
-            return Redirect::route('admin.user.index');
+        }  catch (ModelNotFoundException $exception) {
+            
+            return Inertia::render('Errors/NotFoundError', [
+                'status' => 404,
+                'message' => 'Oops, não foi possível encontrar o usuário',
+                'route' => route('admin.user.index'),
+            ]);
         }
-
-        return Inertia::render('Admin/User/Show', [
-            'user' => $user
-        ]);
+        
     }
 }
