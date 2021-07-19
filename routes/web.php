@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Stock\StockController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,6 +37,13 @@ Route::prefix('/dashboard')->middleware(['auth'])->group(function () {
         Route::get('/new', [UserController::class, 'create'])->name('admin.user.create');
         Route::post('/new', [UserController::class, 'store'])->name('admin.user.store');
         Route::get('/edit/{id}', [UserController::class, 'show'])->name('admin.user.show');
+    });
+
+    Route::prefix('/stock')->group(function () {
+        Route::get('/', [StockController::class, 'index'])->name('admin.stock.index');
+        Route::get('/new', [StockController::class, 'create'])->name('admin.stock.create');
+        Route::post('/new', [StockController::class, 'store'])->name('admin.stock.store');
+        Route::get('/show/{id}', [StockController::class, 'show'])->name('admin.stock.show');
     });
 });
 

@@ -21,6 +21,9 @@
                                 <breeze-nav-link :href="route('admin.user.index')" :active="route().current('admin.user.index')">
                                     Usuários
                                 </breeze-nav-link>
+                                <breeze-nav-link :href="route('admin.stock.index')" :active="route().current('admin.stock.index')">
+                                    Estoques
+                                </breeze-nav-link>
                             </div>
                         </div>
 
