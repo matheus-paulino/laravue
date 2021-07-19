@@ -4,6 +4,7 @@ namespace App\Models\Stock;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Product\Product;
 
 class Stock extends Model
 {
@@ -13,4 +14,10 @@ class Stock extends Model
         'name',
         'type'
     ];
+
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }
