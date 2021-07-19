@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Products\ProductController;
 use App\Http\Controllers\Stock\StockController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,13 @@ Route::prefix('/dashboard')->middleware(['auth'])->group(function () {
         Route::get('/new', [StockController::class, 'create'])->name('admin.stock.create');
         Route::post('/new', [StockController::class, 'store'])->name('admin.stock.store');
         Route::get('/show/{id}', [StockController::class, 'show'])->name('admin.stock.show');
+    });
+
+    Route::prefix('/products')->group(function () {
+        Route::get('/', [ProductController::class, 'index'])->name('admin.product.index');
+        Route::get('/new', [ProductController::class, 'create'])->name('admin.product.create');
+        Route::post('/new', [ProductController::class, 'store'])->name('admin.product.store');
+        Route::get('/show/{id}', [ProductController::class, 'show'])->name('admin.product.show');
     });
 });
 
